@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our 1st Monthsary</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+
+body{
+  min-height:100vh;
+  background: radial-gradient(circle at 20% 20%, #1a1a1a, #050505);
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* INTRO SCREEN */
+.intro{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:10;
+  transition:1s;
+}
+
+.intro.hidden{
+  opacity:0;
+  pointer-events:none;
+}
+
+.intro button{
+  padding:14px 30px;
+  border:1px solid #ff4d6d;
+  background:transparent;
+  color:#ff4d6d;
+  border-radius:30px;
+  cursor:pointer;
+  font-size:1rem;
+  transition:.3s;
+}
+
+.intro button:hover{
+  background:#ff4d6d;
+  color:#fff;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  width:200%;height:200%;
+  background:linear-gradient(120deg,#ff4d6d22,#ffffff11,#ff4d6d22);
+  animation:moveBG 12s linear infinite;
+  z-index:-1;
+}
+
+@keyframes moveBG{
+  0%{transform:translate(0,0)}
+  50%{transform:translate(-25%,-25%)}
+  100%{transform:translate(0,0)}
+}
+
+.container{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
+
+h1{
+  font-size:3.5rem;
+  letter-spacing:4px;
+  background:linear-gradient(90deg,#ff4d6d,#fff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:fadeIn 2s ease;
+}
+
+p{
+  margin-top:20px;
+  max-width:600px;
+  line-height:1.6;
+  opacity:.8;
+  animation:fadeIn 3s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.button{
+  margin-top:30px;
+  padding:12px 28px;
+  border:1px solid #ff4d6d;
+  background:transparent;
+  color:#ff4d6d;
+  border-radius:30px;
+  cursor:pointer;
+  transition:.4s;
+}
+
+.button:hover{
+  background:#ff4d6d;
+  color:#fff;
+  transform:scale(1.1);
+}
+
+.hidden-message{
+  margin-top:20px;
+  opacity:0;
+  transition:1s;
+}
+
+.show{opacity:1}
+
+.orb{
+  position:fixed;
+  width:200px;height:200px;
+  background:#ff4d6d33;
+  filter:blur(80px);
+  border-radius:50%;
+  animation:floatOrb 12s infinite alternate;
+}
+
+@keyframes floatOrb{
+  from{transform:translateY(0)}
+  to{transform:translateY(-100px)}
+}
+
+.gallery{
+  padding:80px 20px;
+}
+
+.gallery h2{
+  text-align:center;
+  margin-bottom:40px;
+  letter-spacing:3px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  max-width:1000px;
+  margin:auto;
+}
+
+.card{
+  position:relative;
+  overflow:hidden;
+  border-radius:20px;
+  cursor:pointer;
+  transition:.4s;
+}
+
+.card img{
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  transition:.6s;
+}
+
+.card:hover img{
+  transform:scale(1.15);
+}
+
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:#000c;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  pointer-events:none;
+  transition:.4s;
+}
+
+.lightbox img{
+  max-width:90%;
+  max-height:80%;
+  border-radius:15px;
+}
+
+.lightbox.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+audio{display:none}
+</style>
+</head>
+<body>
+
+<!-- INTRO (fix autoplay issue) -->
+<div class="intro" id="intro">
+  <h2 style="margin-bottom:20px; opacity:.8">for you</h2>
+  <button onclick="startExperience()">Tap to start</button>
+</div>
+
+<!-- MUSIC -->
+<audio id="bg-music" loop>
+  <source src="Music/Chapter You.mp3" type="audio/mpeg">
+</audio>
+
+<div class="orb" style="top:10%;left:10%"></div>
+<div class="orb" style="bottom:10%;right:10%"></div>
+
+<div class="container">
+  <h1>Happy 1st Monthsary</h1>
+  <p>
+    It hasn’t been that long, but somehow, this already feels different.
+    Not something loud or rushed… just something real.
+
+    I like how we don’t have to force things.
+    How even the simple moments — talking, laughing, just being there —
+    feel enough.
+
+    This past month showed me that what we have isn’t just random.
+    It’s something steady… something I can actually see growing.
+
+    And honestly, I don’t need everything to be perfect.
+    I just need it to be us.
+  </p>
+
+  <button class="button" onclick="showMessage()">Tap me</button>
+
+  <p id="secret" class="hidden-message">
+    One month in, and I already know I don’t want this to end here.
+    I’m not rushing anything, but I’m sure about one thing —
+    I want more days with you, more memories like these,
+    and more chances to choose you again and again.
+  </p>
+</div>
+
+<section class="gallery">
+  <h2>Our Moments</h2>
+  <div class="grid">
+    <div class="card"><img src="image/photo-1.jpg" onclick="openImg(this)"></div>
+    <div class="card"><img src="image/photo-2.jpg" onclick="openImg(this)"></div>
+    <div class="card"><img src="image/photo-3.jpg" onclick="openImg(this)"></div>
+    <div class="card"><img src="image/photo-4.jpg" onclick="openImg(this)"></div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeImg()">
+  <img id="lightbox-img">
+</div>
+
+<script>
+function startExperience(){
+  const music = document.getElementById("bg-music");
+  music.play();
+  document.getElementById("intro").classList.add("hidden");
+}
+
+function showMessage(){
+  document.getElementById("secret").classList.toggle("show")
+}
+
+function openImg(img){
+  document.getElementById("lightbox").classList.add("active")
+  document.getElementById("lightbox-img").src = img.src
+}
+
+function closeImg(){
+  document.getElementById("lightbox").classList.remove("active")
+}
+</script>
+
+</body>
+</html>
